@@ -1,13 +1,23 @@
 <div align="center">
-  <img src="your-photo.jpg" width="120" alt="Tanya Hemdev" style="border-radius:50%"/>
-Hi, I'm Tanya 👋
-Product & Data @ UC Berkeley · Cognitive Science + Data Science · Class of 2027
-Show Image
-Show Image
-Show Image
+  <img src="IMG_7081.JPG" width="130" height="130" style="border-radius:50%; object-fit:cover;" alt="Tanya Hemdev"/>
+  <h1>Hi, I'm Tanya 👋</h1>
+  <p><strong>Product & Data @ UC Berkeley</strong> · Cognitive Science + Data Science · Class of 2027</p>
+  <p>
+    <a href="https://linkedin.com/in/tanyahemdev">
+      <img src="https://img.shields.io/badge/LinkedIn-tanyahemdev-0A66C2?style=flat&logo=linkedin&logoColor=white"/>
+    </a>
+    &nbsp;
+    <a href="mailto:tanyahemdev@berkeley.edu">
+      <img src="https://img.shields.io/badge/Email-tanyahemdev%40berkeley.edu-EA4335?style=flat&logo=gmail&logoColor=white"/>
+    </a>
+    &nbsp;
+    <a href="https://tanyahemdev.com">
+      <img src="https://img.shields.io/badge/Website-tanyahemdev.com-34A853?style=flat&logo=googlechrome&logoColor=white"/>
+    </a>
+  </p>
 </div>
-
-I build at the intersection of health, data, and human behavior. Currently working on AI-driven product initiatives at Kaiser Permanente and leading health product strategy through the Fung Fellowship.
+<br/>
+I build at the intersection of health, data, and human behavior. Currently working on AI-driven product initiatives at Kaiser Permanente and leading health product strategy through the Fung Fellowship at UC Berkeley.
 
 🔨 What I'm working on
 
@@ -28,13 +38,7 @@ Domain · Digital Health · HealthTech · Clinical Workflows · Neuro-accessibil
 📚 Currently Studying @ Berkeley
 Discrete Mathematics Data Structures & Algorithms Calculus I & II Statistics Psychobiology Cognitive Science
 
-📊 GitHub Activity
+📊 Contributions
 <div align="center">
-  <!-- Contribution graph — replace YOUR_USERNAME with your exact GitHub username -->
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=YOUR_USERNAME&theme=minimal&hide_border=true&area=true&color=2ecc71&line=2ecc71&point=27ae60" alt="Contribution Graph" width="100%"/>
-  <br/>
-  <!-- Stats card — replace YOUR_USERNAME with your exact GitHub username -->
-  <img src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&theme=default&hide_border=true&count_private=true&hide=stars&include_all_commits=true" alt="GitHub Stats" height="150"/>
-  <!-- Top languages card — replace YOUR_USERNAME with your exact GitHub username -->
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&layout=compact&hide_border=true&theme=default" alt="Top Languages" height="150"/>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=tanhemdev&theme=minimal&hide_border=true&area=true&color=2ecc71&line=27ae60&point=27ae60&bg_color=ffffff" alt="Contribution Graph" width="100%"/>
 </div>
