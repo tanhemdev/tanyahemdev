@@ -35,7 +35,7 @@ Data · Python (Pandas, NumPy) · SQL · Power BI · Cohort Analysis · Funnel A
 Design · Figma · Wireframing · UX Research · Usability Testing
 Domain · Digital Health · HealthTech · Clinical Workflows · Neuro-accessibility (WCAG)
 
-📚 Currently Studying @ Berkeley
+📚 Currently Studying @ Berkeley:
 Discrete Mathematics Data Structures & Algorithms Calculus I & II Statistics Psychobiology Cognitive Science
 
 📊 Contributions
