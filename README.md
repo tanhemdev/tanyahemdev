@@ -40,5 +40,5 @@ Discrete Mathematics Data Structures & Algorithms Calculus I & II Statistics Psy
 
 📊 Contributions
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=tanhemdev&theme=minimal&hide_border=true&area=true&color=2ecc71&line=27ae60&point=27ae60&bg_color=ffffff" alt="Contribution Graph" width="100%"/>
+  <img src="https://ghchart.rshah.org/239a3b/tanhemdev" alt="tanhemdev's Github chart" width="100%"/>
 </div>
