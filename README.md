@@ -1,6 +1,5 @@
-# tanyahemdev
 <div align="center">
-  <img src="your-photo.jpg" width="120" style="border-radius: 50%;" alt="Tanya Hemdev"/>
+  <img src="your-photo.jpg" width="120" alt="Tanya Hemdev" style="border-radius:50%"/>
 Hi, I'm Tanya 👋
 Product & Data @ UC Berkeley · Cognitive Science + Data Science · Class of 2027
 Show Image
@@ -29,10 +28,13 @@ Domain · Digital Health · HealthTech · Clinical Workflows · Neuro-accessibil
 📚 Currently Studying @ Berkeley
 Discrete Mathematics Data Structures & Algorithms Calculus I & II Statistics Psychobiology Cognitive Science
 
-📊 Contributions
+📊 GitHub Activity
 <div align="center">
-  <img src="https://ghchart.rshah.org/2ecc71/tanyahemdev" alt="Tanya's GitHub Contribution Chart" />
-</div>
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=tanyahemdev&show_icons=true&theme=default&hide_border=true&count_private=true&hide=stars&custom_title=GitHub+Stats" alt="GitHub Stats" />
+  <!-- Contribution graph — replace YOUR_USERNAME with your exact GitHub username -->
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=YOUR_USERNAME&theme=minimal&hide_border=true&area=true&color=2ecc71&line=2ecc71&point=27ae60" alt="Contribution Graph" width="100%"/>
+  <br/>
+  <!-- Stats card — replace YOUR_USERNAME with your exact GitHub username -->
+  <img src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&theme=default&hide_border=true&count_private=true&hide=stars&include_all_commits=true" alt="GitHub Stats" height="150"/>
+  <!-- Top languages card — replace YOUR_USERNAME with your exact GitHub username -->
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&layout=compact&hide_border=true&theme=default" alt="Top Languages" height="150"/>
 </div>
