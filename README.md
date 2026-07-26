@@ -1,128 +1,121 @@
-# Tanya Hemdev
+<h1 align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=4000&pause=1000&color=003262&center=true&vCenter=true&width=600&lines=Tanya+Hemdev;APM+%7C+AI+Product+Manager;UC+Berkeley+%7C+CogSci+%2B+Data+Science;Builder.+Analyst.+Operator." alt="Typing SVG" />
+</h1>
 
-<p align="center"><sub><em>
-Cognitive science taught me how people think. Data science taught me how to measure it.<br />
-I build products at the intersection of both where behavioral insight meets real-world impact.<br />
-From a diabetes management platform inspired by my twin sister's diagnosis<br />
-to shipping AI tools at Kaiser Permanente,<br />
-every project starts with the same question: what does this person actually need?
-</em></sub></p>
-
-**[tanyahemdev.com →](https://tanyahemdev.com)** · **[tanyahemdev@berkeley.edu](mailto:tanyahemdev@berkeley.edu)**
-
----
-
-## Now
-
-**Product Strategy @ [Lennox International](https://www.lennoxinternational.com/)** — Driving product strategy for climate technology solutions. Translating market insights into scalable product roadmaps.
-
-**ACE Intern @ [Berkeley SkyDeck](https://skydeck.berkeley.edu/)** — Supporting early-stage startups at Berkeley's premier accelerator. Working alongside founders building the next generation of products.
-
-**Curriculum Lead @ [Fung Fellowship](https://fungfellowship.berkeley.edu/)** — Designing the educational framework for health tech product development. Led a digital health MVP from concept to prototype with 30+ user interviews, sprint planning, and product specifications.
-
-**Peer Academic Counselor @ [EOP Berkeley](https://eop.berkeley.edu/)** — Mentoring first-generation and low-income students navigating Berkeley. Helping students like myself find their path at university.
+<p align="center">
+  <a href="https://linkedin.com/in/tanyahemdev"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+  <a href="mailto:tanyahemdev@berkeley.edu"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  <img src="https://img.shields.io/badge/UC_Berkeley-003262?style=for-the-badge&logo=data:image/png;base64,&logoColor=white" />
+  <img src="https://img.shields.io/badge/Adobe_Ambassador-FF0000?style=for-the-badge&logo=adobe&logoColor=white" />
+</p>
 
 ---
 
-## Previously
+## About Me
 
-**AI Product Strategy @ [Kaiser Permanente](https://healthy.kaiserpermanente.org/)** — Shipped AI-powered clinical decision support tools across one of the nation's largest integrated healthcare systems. Conducted user testing with clinicians, built business cases that secured executive buy-in.
+Product manager and founder who builds at the intersection of **cognitive science**, **data science**, and **product strategy**. I use behavioral frameworks and quantitative modeling to ship products that solve real problems — from 0-to-1 digital health platforms to enterprise B2B analytics tools.
 
-**Events Coordinator @ Boundary.0** — Organized community events bridging students with tech and entrepreneurship at Berkeley.
-
-**Finance VP @ Indian Students Association** — Managed budget and financial operations for one of Berkeley's largest cultural organizations.
-
-**UX Designer @ TheraPTales Speech Clinic** — Designed intuitive interfaces for speech therapy tools, translating clinical workflows into clean digital experiences.
+Currently at **UC Berkeley** studying Cognitive Science and Data Science. Previously shipped product at **Kaiser Permanente** and **Lennox International**. **Adobe Student Ambassador**. Seeking APM and AI PM roles at high-growth startups and tech companies.
 
 ---
 
-## Projects
+## Technical & Product Stack
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://github.com/tanhemdev/TAN-1-PROTOTYPE"><b>TAN-1</b></a><br />
-      <sub>Non-invasive biosensor + predictive AI for diabetes management</sub><br />
-      <img src="https://img.shields.io/static/v1?style=for-the-badge&label=focus&message=health%20tech%20%7C%20AI%20%7C%20biosensors&labelColor=10b981&color=111827" alt="focus health tech AI biosensors" /><br /><br />
-      <b>92%</b> model accuracy · <b>3</b> biosensor integrations · <b>2,000+</b> potential users<br /><br />
-      <sub>Founded after my twin sister's Type 1 diabetes diagnosis. Integrates biosensors with a predictive AI layer that surfaces plain-English guidance instead of raw data. Led product vision from first principles, designed Figma mockups mapping full user journeys, and pitched to investors at UC Berkeley. <a href="https://ls.berkeley.edu/news/cognitive-science-students-pitch-health-tech-ai-assistants-investors">Featured in Berkeley L&S News</a>.</sub>
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://github.com/tanhemdev/curb"><b>Curb</b></a><br />
-      <sub>Free peer-to-peer marketplace for UC Berkeley students</sub><br />
-      <img src="https://img.shields.io/static/v1?style=for-the-badge&label=focus&message=marketplace%20%7C%20.edu%20auth%20%7C%20react&labelColor=6366f1&color=111827" alt="focus marketplace .edu auth react" /><br /><br />
-      <b>.edu-only</b> auth · <b>72hr</b> auto-expiring listings · <b>Pinterest-style</b> feed<br /><br />
-      <sub>Campus-only marketplace with university email verification. Built with React, featuring a visual discovery feed, auto-expiring listings to keep inventory fresh, and a trust layer backed by verified student identities.</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://github.com/tanhemdev/spotify-realtime-translation"><b>Spotify Real-Time Translation</b></a><br />
-      <sub>Live podcast translation using NLP and speech synthesis</sub><br />
-      <img src="https://img.shields.io/static/v1?style=for-the-badge&label=focus&message=NLP%20%7C%20real-time%20%7C%20audio&labelColor=f59e0b&color=111827" alt="focus NLP real-time audio" /><br /><br />
-      <b>4+</b> target languages · <b>RT</b> latency · <b>5,000+</b> potential users<br /><br />
-      <sub>Designed a real-time translation layer using NLP transcription, neural machine translation, and voice synthesis. Mapped edge cases across speaker types and content formats. Shipped a full PRD with latency-aware mode switching (news vs. comedy vs. interview).</sub>
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://github.com/tanhemdev/neuro-accessible-platformer"><b>Neuro-Accessible Learning Platformer</b></a><br />
-      <sub>Hand-gesture game controller for students with disabilities</sub><br />
-      <img src="https://img.shields.io/static/v1?style=for-the-badge&label=focus&message=Python%20%7C%20OpenCV%20%7C%20accessibility&labelColor=ef4444&color=111827" alt="focus Python OpenCV accessibility" /><br /><br />
-      <b>0</b> physical input required · <b>3+</b> schools tested · <b>WCAG</b> compliant<br /><br />
-      <sub>Engineered a hand-gesture controller using Python, OpenCV, and MediaPipe. Maps hand landmarks to game inputs in real time with tunable gesture sensitivity per student motor ability profile. Tested with schools for students with disabilities.</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://github.com/tanhemdev/ai-speech-monitoring"><b>AI-Assisted Speech Monitoring</b></a><br />
-      <sub>UX research + full PRD for neurological patients</sub><br />
-      <img src="https://img.shields.io/static/v1?style=for-the-badge&label=focus&message=PM%20%7C%20UX%20research%20%7C%20Figma&labelColor=a855f7&color=111827" alt="focus PM UX research Figma" /><br /><br />
-      <b>1</b> full PRD · <b>100%</b> dev-ready · <b>WCAG</b> compliant<br /><br />
-      <sub>Conducted UX research with neurologically affected patients. Translated findings into a full PRD with user flows, edge cases, and accessibility requirements. Designed adaptive UI states based on detected fatigue, not static one-size-fits-all. Complete dev handoff documentation.</sub>
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://github.com/tanhemdev/tiktok-creator-onboarding-pm"><b>TikTok Creator Monetization</b></a><br />
-      <sub>PM case study: creator onboarding activation</sub><br />
-      <img src="https://img.shields.io/static/v1?style=for-the-badge&label=focus&message=PM%20%7C%20A%2FB%20testing%20%7C%20RICE&labelColor=0ea5e9&color=111827" alt="focus PM A/B testing RICE" /><br /><br />
-      <b>PRD</b> + RICE prioritization · <b>A/B</b> test design · <b>6-sprint</b> roadmap<br /><br />
-      <sub>End-to-end PM case study covering creator monetization activation. Includes PRD, RICE prioritization framework, A/B test design, and a 6-sprint roadmap for scaling creator onboarding.</sub>
-    </td>
-  </tr>
-</table>
+| **Category** | **Skills** |
+|:---|:---|
+| **Product** | PRDs, User Stories, Roadmapping, A/B Testing, Feature Prioritization (RICE/ICE), Agile/Scrum, Stakeholder Management |
+| **Data Science** | Python (Pandas, NumPy, Scikit-learn), SQL, KNN, Linear Regression, Cohort Analysis, Predictive Modeling |
+| **Design & Research** | Figma, User Research, Wireframing, Systems Architecture, Journey Mapping, Usability Testing |
+| **Tools** | Jira, Confluence, Notion, Tableau, Git, Jupyter Notebooks |
+
+---
+
+## Key Accomplishments (X-Y-Z Format)
+
+```
++-----------------------------------------------------------------------------------+
+|  KAISER PERMANENTE — Product Management Intern                                     |
++-----------------------------------------------------------------------------------+
+|  > Increased clinical engagement by 25%, as measured by outreach response rates,  |
+|    by designing proactive patient messaging workflows using SQL-driven cohort      |
+|    analysis and A/B testing across 500K+ patient records.                          |
+|                                                                                    |
+|  > Reduced physician alert fatigue by 30%, as measured by notification dismissal  |
+|    rates, by defining product requirements for 3 clinical notification features    |
+|    through user research with 15+ clinicians and iterative Figma prototyping.      |
++-----------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------+
+|  LENNOX INTERNATIONAL — Product Management Intern                                  |
++-----------------------------------------------------------------------------------+
+|  > Informed a $2M product positioning strategy across 150+ HVAC SKUs, as measured |
+|    by executive adoption in quarterly planning, by building competitive            |
+|    intelligence data matrices using Python (Pandas, NumPy).                        |
+|                                                                                    |
+|  > Accelerated specification analysis turnaround by 60%, as measured by time-to-  |
+|    insight, by automating data extraction pipelines from 5 competitor catalogs,    |
+|    enabling identification of 12 market gaps.                                      |
++-----------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------+
+|  FUNG FELLOWSHIP @ UC BERKELEY — Curriculum Lead                                   |
++-----------------------------------------------------------------------------------+
+|  > Designed and launched health innovation curriculum for 40+ students, as         |
+|    measured by course enrollment and completion rates, by integrating design       |
+|    thinking frameworks with emerging health-tech case studies.                      |
++-----------------------------------------------------------------------------------+
+```
+
+---
+
+## Pin-Worthy Projects
+
+### 1. Predictive AI Churn & Engagement Model
+> **Python | Pandas | Scikit-learn | Jupyter Notebook**
+
+Built an end-to-end predictive model for user churn and engagement scoring using classification algorithms (KNN, Logistic Regression). Conducted feature engineering on 50K+ user behavioral records, achieving 87% prediction accuracy. Translated model outputs into actionable product recommendations — identifying 3 high-risk user segments and proposing targeted re-engagement features that would reduce churn by an estimated 18%.
+
+**Key Skills:** Feature Engineering, Predictive Modeling, Data-Driven Product Decisions
+
+---
+
+### 2. B2B Specification Analytics & Decision Framework
+> **Python | Pandas | NumPy | Competitive Analysis**
+
+Developed an automated competitive intelligence pipeline for the HVAC industry, extracting and normalizing specification data across 5 major competitors and 150+ product SKUs. Built interactive decision matrices that surfaced 12 market positioning gaps, directly informing Lennox's $2M product strategy. Framework reduced manual analysis time by 60% and was adopted by the product leadership team for quarterly planning.
+
+**Key Skills:** Competitive Analysis Automation, B2B Product Strategy, Data Pipeline Design
+
+---
+
+### 3. Dark Pattern Detection Research
+> **Python | NLP | User Research | UC Berkeley**
+
+Led a research initiative analyzing dark pattern prevalence across 100+ consumer applications, combining NLP-based pattern detection with qualitative user research. Identified and categorized 8 distinct dark pattern taxonomies, contributing findings to UC Berkeley's HCI research group. Work informed design ethics guidelines adopted by 2 student product teams.
+
+**Key Skills:** NLP, UX Research, Design Ethics, Academic Research
 
 ---
 
 ## Education
 
-**UC Berkeley** — B.A. Cognitive Science + B.A. Data Science 
-
-Coursework spanning behavioral economics, machine learning, statistical inference, and product design. Research at the intersection of how people think and how data shapes better experiences.
+| | |
+|:---|:---|
+| **University of California, Berkeley** | B.A. Cognitive Science, Minor in Data Science |
+| **Expected Graduation** | May 2028 |
+| **Relevant Coursework** | Data Structures, Machine Learning, Human-Computer Interaction, Cognitive Psychology, Statistical Methods |
+| **Activities** | Fung Fellowship, Adobe Student Ambassador, SkyDeck Innovation Fellow, SCET Student Intern |
 
 ---
 
-## Highlights
+## What I'm Looking For
 
-| Highlight | Detail |
-|---|---|
-| **Berkeley L&S Feature** | [Pitched TAN-1 to investors at BASICS Fall Pitch Day](https://ls.berkeley.edu/news/cognitive-science-students-pitch-health-tech-ai-assistants-investors) — diabetes management platform inspired by twin sister's Type 1 diagnosis |
-| **Kaiser Permanente AI** | Shipped AI decision-support tools to production across one of the largest healthcare systems in the US |
-| **Berkeley SkyDeck** | ACE Intern at Berkeley's premier startup accelerator, working directly with early-stage founders |
-| **Fung Fellowship** | Curriculum Lead — directed a digital health MVP from concept to prototype with 30+ user interviews |
-| **First-Gen Leader** | Peer Academic Counselor at EOP, mentoring first-gen and low-income students at Berkeley |
-| **Leadership Path** | Ping Pong Team Captain → Leo Lions Service Director → ISA Finance VP → Boundary.0 Events → Fung Curriculum Lead → EOP Counselor → SkyDeck ACE Intern |
+I'm seeking **APM, Product Manager, or AI PM roles** at high-growth startups and tech companies. I thrive in 0-to-1 environments where I can own product strategy end-to-end, leverage data science for feature prioritization, and ship AI-powered products at scale.
 
 ---
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=tanhemdev&theme=transparent&hide_border=true&ring=c8a2ff&fire=c8a2ff&currStreakLabel=c8a2ff&sideLabels=adbac7&dates=adbac7&currStreakNum=adbac7&sideNums=adbac7" alt="GitHub streak stats" height="165" />
+  <img src="https://komarev.com/ghpvc/?username=tanhemdev&color=003262&style=flat-square&label=Profile+Views" />
 </p>
 
----
-
-<p align="center">
-  <a href="mailto:tanhemdev@gmail.com">Email</a> ·
-  <a href="https://linkedin.com/in/tanyahemdev">LinkedIn</a> ·
-  <a href="https://github.com/tanhemdev">GitHub</a> ·
-  <a href="https://tanyahemdev.com">Portfolio</a>
-</p>
-
----
+<p align="center"><i>"The best product managers don't just ship features — they ship outcomes."</i></p>
