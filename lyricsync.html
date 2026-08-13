@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LyricSync // Cultural Context Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A0A0A;--surface:#141414;--surface-2:#1C1C1C;--surface-3:#252525;
+  --text:#FFFFFF;--text-2:#A0A0A0;--text-3:#666;
+  --green:#1DB954;--green-dark:#1AA34A;--green-bg:rgba(29,185,84,.1);
+  --border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.12);
+  --heading:'Outfit',sans-serif;--body:'Plus Jakarta Sans',sans-serif;--mono:'Fira Code',monospace;
+  --radius:12px;--shadow:0 4px 16px rgba(0,0,0,.3)
+}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.topbar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.topbar-icon{width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
+.topbar-icon svg{width:14px;height:14px}
+.topbar-title{font-family:var(--heading);font-size:.92rem;font-weight:700;letter-spacing:-.01em}
+.topbar-title span{color:var(--text-3);font-weight:400}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-pill{font-family:var(--heading);font-size:.78rem;font-weight:600;padding:7px 16px;border-radius:20px;transition:all .2s;border:none;background:none;cursor:pointer;color:var(--text-2)}
+.nav-pill:hover{background:var(--surface-2);color:var(--text)}
+.nav-pill.green{background:var(--green);color:#000;font-weight:700}
+.nav-pill.green:hover{background:var(--green-dark)}
+
+/* ── MODALS ── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border-2);border-radius:16px;padding:32px;max-width:520px;width:92vw;position:relative;box-shadow:var(--shadow)}
+.modal-close{position:absolute;top:14px;right:14px;background:var(--surface-2);border:none;color:var(--text-2);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.modal-close:hover{background:var(--surface-3)}
+.modal h3{font-family:var(--heading);font-size:1.1rem;font-weight:700;margin-bottom:12px}
+.modal p{font-size:.88rem;color:var(--text-2);margin-bottom:14px;line-height:1.65}
+.tech-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tech-tag{font-family:var(--mono);font-size:.6rem;padding:4px 10px;border-radius:6px;background:var(--surface-2);color:var(--text-2)}
+.modal-link{font-family:var(--mono);font-size:.78rem;color:var(--green);font-weight:500}
+
+/* ── LAYOUT ── */
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section{padding:48px 0}
+.back-link{font-family:var(--mono);font-size:.72rem;color:var(--text-3);display:inline-flex;align-items:center;gap:6px;transition:color .2s}
+.back-link:hover{color:var(--green)}
+
+/* ── PROBLEM BANNER ── */
+.problem-banner{background:linear-gradient(180deg,#0A0A0A 0%,#111 100%);padding:56px 0;border-bottom:1px solid var(--border)}
+.problem-label{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-3);margin-bottom:14px}
+.problem-h{font-family:var(--heading);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:16px;letter-spacing:-.03em;max-width:700px}
+.problem-h .green{color:var(--green)}
+.problem-sub{font-size:.95rem;color:var(--text-2);max-width:620px;line-height:1.7;margin-bottom:32px}
+.problem-stats{display:flex;gap:28px;flex-wrap:wrap}
+.pstat{text-align:center}
+.pstat-val{font-family:var(--heading);font-size:1.8rem;font-weight:800}
+.pstat-val .unit{font-size:.85rem;font-weight:500;color:var(--text-3)}
+.pstat-label{font-family:var(--mono);font-size:.55rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-top:2px}
+
+/* ── SPOTIFY CONNECT ── */
+.connect-section{text-align:center;padding:48px 24px}
+.connect-card{background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:48px 32px;max-width:480px;margin:0 auto}
+.connect-card h3{font-family:var(--heading);font-size:1.3rem;font-weight:800;margin-bottom:8px}
+.connect-card p{font-size:.88rem;color:var(--text-2);margin-bottom:24px}
+.spotify-btn{background:var(--green);color:#000;border:none;padding:14px 32px;border-radius:32px;font-family:var(--heading);font-size:.92rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
+.spotify-btn:hover{background:var(--green-dark);transform:scale(1.02)}
+.spotify-btn svg{width:20px;height:20px}
+.connect-note{font-family:var(--mono);font-size:.62rem;color:var(--text-3);margin-top:16px}
+
+/* ── DEMO MODE BANNER ── */
+.demo-banner{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:12px;font-size:.82rem;color:var(--text-2)}
+.demo-badge{font-family:var(--mono);font-size:.6rem;padding:4px 10px;border-radius:6px;background:var(--green-bg);color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
+
+/* ── TRACK SELECTOR (Spotify-style horizontal scroll) ── */
+.track-shelf{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;margin-bottom:24px;scroll-snap-type:x mandatory}
+.track-shelf::-webkit-scrollbar{height:4px}
+.track-shelf::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:2px}
+.track-card{flex-shrink:0;width:160px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;scroll-snap-align:start}
+.track-card:hover{border-color:var(--border-2);background:var(--surface-2)}
+.track-card.active{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}
+.track-art{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#333,#111);display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.track-card-body{padding:10px 12px}
+.track-card-title{font-family:var(--heading);font-size:.78rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track-card-artist{font-size:.7rem;color:var(--text-3)}
+
+/* ── NOW PLAYING BAR (Spotify bottom bar style) ── */
+.player-bar{position:fixed;bottom:0;left:0;right:0;z-index:90;background:var(--surface);border-top:1px solid var(--border-2);padding:12px 24px}
+.player-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:220px 1fr 140px;gap:20px;align-items:center}
+@media(max-width:700px){.player-inner{grid-template-columns:1fr;gap:10px}.player-right{display:none}}
+.player-left{display:flex;align-items:center;gap:12px}
+.player-art{width:48px;height:48px;border-radius:6px;background:linear-gradient(135deg,#333,#111);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.player-info h5{font-family:var(--heading);font-size:.82rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.player-info span{font-size:.72rem;color:var(--text-3)}
+.player-center{display:flex;flex-direction:column;align-items:center;gap:6px}
+.player-controls{display:flex;align-items:center;gap:16px}
+.ctrl-btn{background:none;border:none;color:var(--text-2);cursor:pointer;font-size:1.1rem;padding:4px;transition:color .2s}
+.ctrl-btn:hover{color:var(--text)}
+.play-btn{width:36px;height:36px;border-radius:50%;background:#fff;border:none;color:#000;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.play-btn:hover{transform:scale(1.06)}
+.progress-row{display:flex;align-items:center;gap:8px;width:100%;max-width:500px}
+.time-label{font-family:var(--mono);font-size:.6rem;color:var(--text-3);min-width:32px;text-align:center}
+.progress-bar{flex:1;height:4px;background:var(--surface-3);border-radius:2px;cursor:pointer;position:relative}
+.progress-bar:hover{height:6px}
+.progress-fill{height:100%;background:var(--text);border-radius:2px;transition:width .1s linear;position:relative}
+.progress-bar:hover .progress-fill{background:var(--green)}
+.player-right{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.vol-bar{width:80px;height:4px;background:var(--surface-3);border-radius:2px;position:relative}
+.vol-fill{height:100%;background:var(--text);border-radius:2px;width:70%}
+
+/* ── LYRICS PANEL ── */
+.lyrics-panel{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:100px}
+@media(max-width:700px){.lyrics-panel{grid-template-columns:1fr}}
+.lyrics-col{padding:24px;max-height:480px;overflow-y:auto;scroll-behavior:smooth}
+.lyrics-col:first-child{border-right:1px solid var(--border)}
+.col-header{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-3);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:2}
+.lyric-line{padding:10px 14px;border-radius:8px;font-size:.9rem;color:var(--text-3);transition:all .35s;margin-bottom:3px;line-height:1.55;cursor:default}
+.lyric-line.active{background:var(--green-bg);color:var(--text);font-weight:600;transform:scale(1.01);border-left:3px solid var(--green)}
+.lyric-line.past{opacity:.3}
+
+/* SLANG */
+.slang-pill{display:inline;background:rgba(29,185,84,.15);color:var(--green);padding:1px 8px;border-radius:6px;cursor:pointer;transition:background .2s;font-weight:600}
+.slang-pill:hover{background:rgba(29,185,84,.3)}
+.slang-drawer{position:fixed;top:0;right:0;width:min(380px,85vw);height:100vh;background:var(--surface);border-left:1px solid var(--border-2);z-index:150;transform:translateX(100%);transition:transform .3s ease;overflow-y:auto;padding:32px}
+.slang-drawer.open{transform:translateX(0)}
+.slang-drawer-close{position:absolute;top:14px;right:14px;background:var(--surface-2);border:none;color:var(--text-2);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.slang-drawer h4{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);margin-bottom:8px}
+.slang-word{font-family:var(--heading);font-size:2rem;font-weight:800;color:var(--green);margin-bottom:20px}
+.slang-section{margin-bottom:20px}
+.slang-section-title{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);margin-bottom:6px}
+.slang-section p{font-size:.88rem;color:var(--text-2);line-height:1.65}
+.slang-backdrop{position:fixed;inset:0;z-index:140;background:rgba(0,0,0,.3);display:none}
+.slang-backdrop.open{display:block}
+
+/* ── IMPACT ── */
+.impact-section{background:var(--surface);border-top:1px solid var(--border);padding:56px 0;margin-bottom:80px}
+.impact-label{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-3);margin-bottom:14px}
+.impact-h{font-family:var(--heading);font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.impact-sub{font-size:.92rem;color:var(--text-2);max-width:560px;line-height:1.7;margin-bottom:28px}
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:28px}
+.impact-card{background:var(--surface-2);border-radius:var(--radius);padding:24px;text-align:center}
+.impact-val{font-family:var(--heading);font-size:2rem;font-weight:800;color:var(--green)}
+.impact-desc{font-family:var(--mono);font-size:.55rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-top:4px}
+.next-box{background:var(--surface-2);border-radius:var(--radius);padding:28px}
+.next-box h4{font-family:var(--heading);font-weight:700;margin-bottom:14px}
+.next-list{display:flex;flex-direction:column;gap:10px}
+.next-item{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--text-2);line-height:1.5}
+.next-num{font-family:var(--mono);font-size:.62rem;font-weight:600;color:var(--green);background:var(--green-bg);width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.footer{text-align:center;padding:28px;font-family:var(--mono);font-size:.62rem;color:var(--text-3);margin-bottom:80px}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <div class="topbar-icon"><svg viewBox="0 0 24 24" fill="#000"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 14.36c-.2.2-.51.2-.71 0-1.97-1.2-4.45-1.47-7.37-.81-.28.07-.57-.1-.64-.39-.07-.28.1-.57.39-.64 3.2-.73 5.94-.42 8.14.93.2.12.26.38.14.57l.05.34zm1.23-2.71c-.25.25-.64.25-.89 0-2.25-1.38-5.68-1.78-8.34-.97-.34.1-.7-.09-.8-.43-.1-.34.09-.7.43-.8 3.04-.93 6.82-.48 9.39 1.11.25.15.33.48.18.73l.03.36zm.11-2.83C14.9 8.62 9.44 8.42 6.26 9.34c-.41.12-.84-.11-.96-.52-.12-.41.11-.84.52-.96C9.38 6.85 15.41 7.08 19.18 9.5c.37.22.49.7.27 1.07-.22.37-.7.49-1.07.27l-.4-.02z"/></svg></div>
+      <div class="topbar-title">LyricSync <span>// Cultural Context Engine</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-pill">&larr; Portfolio</a>
+      <button class="nav-pill" id="ghBtn">GitHub</button>
+      <button class="nav-pill green" id="connectBtn">Connect Spotify</button>
+    </div>
+  </div>
+</div>
+
+<!-- GH MODAL -->
+<div class="modal-overlay" id="ghModal">
+  <div class="modal">
+    <button class="modal-close" id="ghClose">&times;</button>
+    <h3>Technical Architecture</h3>
+    <p>LyricSync connects via Spotify Web API OAuth, polls playback state at 100ms intervals, and maps timestamps to a custom contextual translation pipeline. Poetry stays poetry. Slang stays slang.</p>
+    <div class="tech-tags">
+      <span class="tech-tag">React</span><span class="tech-tag">Node.js + Express</span><span class="tech-tag">Spotify Web API</span>
+      <span class="tech-tag">MongoDB</span><span class="tech-tag">Redis</span><span class="tech-tag">Custom NLP Pipeline</span>
+    </div>
+    <a href="https://github.com/tanhemdev/lyric-sync" target="_blank" rel="noopener" class="modal-link">View source on GitHub &nearr;</a>
+  </div>
+</div>
+
+<!-- SPOTIFY CONNECT MODAL -->
+<div class="modal-overlay" id="spotifyModal">
+  <div class="modal" style="text-align:center">
+    <button class="modal-close" id="spotifyClose">&times;</button>
+    <div style="font-size:3rem;margin-bottom:16px">🎵</div>
+    <h3>Connect Your Spotify</h3>
+    <p>LyricSync uses the Spotify Web API to detect what you're playing in real time and sync translations to your music. You'll need a Spotify Premium account.</p>
+    <p style="font-size:.78rem">To enable live mode, register a Spotify app at <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener" style="color:var(--green)">developer.spotify.com</a>, set the redirect URI to this page's URL, and paste your Client ID below.</p>
+    <div style="margin:16px 0">
+      <input type="text" id="clientIdInput" placeholder="Paste your Spotify Client ID" style="width:100%;padding:12px 16px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:10px;color:var(--text);font-family:var(--mono);font-size:.82rem;outline:none;text-align:center">
+    </div>
+    <button class="spotify-btn" id="spotifyAuthBtn" style="width:100%">
+      <svg viewBox="0 0 24 24" fill="#000" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 14.36c-.2.2-.51.2-.71 0-1.97-1.2-4.45-1.47-7.37-.81-.28.07-.57-.1-.64-.39-.07-.28.1-.57.39-.64 3.2-.73 5.94-.42 8.14.93.2.12.26.38.14.57l.05.34zm1.23-2.71c-.25.25-.64.25-.89 0-2.25-1.38-5.68-1.78-8.34-.97-.34.1-.7-.09-.8-.43-.1-.34.09-.7.43-.8 3.04-.93 6.82-.48 9.39 1.11.25.15.33.48.18.73l.03.36z"/></svg>
+      Authorize with Spotify
+    </button>
+    <div style="margin-top:16px;font-family:var(--mono);font-size:.62rem;color:var(--text-3)">Or continue in demo mode with simulated playback below</div>
+  </div>
+</div>
+
+<!-- SLANG DRAWER -->
+<div class="slang-backdrop" id="slangBackdrop"></div>
+<div class="slang-drawer" id="slangDrawer">
+  <button class="slang-drawer-close" id="slangClose">&times;</button>
+  <h4>Cultural Context</h4>
+  <div class="slang-word" id="slangWord"></div>
+  <div class="slang-section"><div class="slang-section-title">Literal Translation</div><p id="slangLiteral"></p></div>
+  <div class="slang-section"><div class="slang-section-title">What It Actually Means</div><p id="slangMeaning"></p></div>
+  <div class="slang-section"><div class="slang-section-title">Why Machine Translation Fails</div><p id="slangWhy"></p></div>
+  <div class="slang-section"><div class="slang-section-title">Regional Context</div><p id="slangRegion"></p></div>
+</div>
+
+<!-- ═══ PROBLEM ═══ -->
+<div class="problem-banner">
+  <div class="container">
+    <div class="problem-label">The Problem</div>
+    <h2 class="problem-h"><span class="green">128 million</span> people watched the Super Bowl halftime. Most had no idea what he was saying.</h2>
+    <p class="problem-sub">Bad Bunny performed the first all-Spanish halftime show. 77M of his US Spotify listeners don't speak Spanish. Google Translate gives you "Uncle asked me" for "Titi Me Preguntó." The music hits. The meaning doesn't.</p>
+    <div class="problem-stats">
+      <div class="pstat"><div class="pstat-val">128<span class="unit">M</span></div><div class="pstat-label">Super Bowl viewers</div></div>
+      <div class="pstat"><div class="pstat-val">77<span class="unit">M</span></div><div class="pstat-label">US listeners, non-Spanish</div></div>
+      <div class="pstat"><div class="pstat-val">103<span class="unit">M</span></div><div class="pstat-label">monthly Spotify listeners</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="section">
+  <div class="container">
+    <div class="demo-banner" id="demoBanner">
+      <span class="demo-badge">Demo Mode</span>
+      Simulated playback is active. <button id="connectBtn2" style="background:none;border:none;color:var(--green);font-weight:600;cursor:pointer;font-family:inherit;text-decoration:underline">Connect Spotify</button> for live sync with your actual music.
+    </div>
+
+    <!-- TRACK SELECTOR -->
+    <div class="track-shelf" id="trackShelf"></div>
+
+    <!-- LYRICS -->
+    <div class="lyrics-panel">
+      <div class="lyrics-col" id="lyricsOrig"><div class="col-header">Original</div></div>
+      <div class="lyrics-col" id="lyricsTrans"><div class="col-header">Translation</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- IMPACT -->
+<div class="impact-section">
+  <div class="container">
+    <div class="impact-label">Impact So Far</div>
+    <h3 class="impact-h">From a Super Bowl question to 2,000+ users.</h3>
+    <p class="impact-sub">Built in 5 sprints. 50+ songs with full contextual translations across 4 Bad Bunny albums. Each translation includes cultural annotations, slang dictionaries, and alternate meaning notes.</p>
+    <div class="impact-grid">
+      <div class="impact-card"><div class="impact-val">2K+</div><div class="impact-desc">Users</div></div>
+      <div class="impact-card"><div class="impact-val">50+</div><div class="impact-desc">Songs Translated</div></div>
+      <div class="impact-card"><div class="impact-val">4</div><div class="impact-desc">Albums Covered</div></div>
+      <div class="impact-card"><div class="impact-val">Sub-50ms</div><div class="impact-desc">Lookup Latency</div></div>
+    </div>
+    <div class="next-box">
+      <h4>What's Next</h4>
+      <div class="next-list">
+        <div class="next-item"><span class="next-num">1</span>Expand beyond Bad Bunny — Rosalía, Stromae, BTS, and more with community-contributed translations</div>
+        <div class="next-item"><span class="next-num">2</span>Spotify Web Playback SDK integration for in-browser listening without needing the desktop app</div>
+        <div class="next-item"><span class="next-num">3</span>Community correction system with quality review pipeline for native speaker contributions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Built by Tanya Hemdev &middot; UC Berkeley '26 &middot; Cognitive Science + Data Science</div>
+
+<!-- ═══ PLAYER BAR ═══ -->
+<div class="player-bar">
+  <div class="player-inner">
+    <div class="player-left">
+      <div class="player-art" id="playerArt">🎵</div>
+      <div class="player-info"><h5 id="playerTitle">Select a track</h5><span id="playerArtist">—</span></div>
+    </div>
+    <div class="player-center">
+      <div class="player-controls">
+        <button class="ctrl-btn" id="prevBtn">&#9198;</button>
+        <button class="play-btn" id="playBtn">&#9654;</button>
+        <button class="ctrl-btn" id="nextBtn">&#9197;</button>
+      </div>
+      <div class="progress-row">
+        <span class="time-label" id="timeElapsed">0:00</span>
+        <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="time-label" id="timeDur">0:00</span>
+      </div>
+    </div>
+    <div class="player-right">
+      <span style="font-size:.8rem">🔊</span>
+      <div class="vol-bar"><div class="vol-fill"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+/* ── MODALS ── */
+function modal(btnId,ovId,clId){const b=document.getElementById(btnId),o=document.getElementById(ovId),c=document.getElementById(clId);if(b)b.addEventListener('click',()=>o.classList.add('open'));if(c)c.addEventListener('click',()=>o.classList.remove('open'));if(o)o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')})}
+modal('ghBtn','ghModal','ghClose');
+modal('connectBtn','spotifyModal','spotifyClose');
+document.getElementById('connectBtn2').addEventListener('click',()=>document.getElementById('spotifyModal').classList.add('open'));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));slangDrawer.classList.remove('open');slangBackdrop.classList.remove('open')}});
+
+/* ── SPOTIFY AUTH ── */
+document.getElementById('spotifyAuthBtn').addEventListener('click',()=>{
+  const clientId=document.getElementById('clientIdInput').value.trim();
+  if(!clientId){alert('Please paste your Spotify Client ID first.\n\nGet one at developer.spotify.com/dashboard');return}
+  const redirect=encodeURIComponent(window.location.href.split('#')[0].split('?')[0]);
+  const scopes='user-read-playback-state user-read-currently-playing user-modify-playback-state streaming';
+  window.location.href='https://accounts.spotify.com/authorize?client_id='+clientId+'&response_type=token&redirect_uri='+redirect+'&scope='+encodeURIComponent(scopes);
+});
+
+// Check for token in hash (OAuth callback)
+const hashParams=new URLSearchParams(window.location.hash.substring(1));
+const accessToken=hashParams.get('access_token');
+if(accessToken){
+  window.history.replaceState(null,'',window.location.pathname);
+  document.getElementById('demoBanner').innerHTML='<span class="demo-badge" style="background:rgba(29,185,84,.15);color:#1DB954">LIVE</span> Connected to Spotify. Play a song in Spotify to see live sync.';
+  startSpotifyPolling(accessToken);
+}
+
+function startSpotifyPolling(token){
+  setInterval(async()=>{
+    try{
+      const res=await fetch('https://api.spotify.com/v1/me/player/currently-playing',{headers:{Authorization:'Bearer '+token}});
+      if(res.status===200){
+        const data=await res.json();
+        if(data&&data.item){
+          document.getElementById('playerTitle').textContent=data.item.name;
+          document.getElementById('playerArtist').textContent=data.item.artists.map(a=>a.name).join(', ');
+          const pct=(data.progress_ms/data.item.duration_ms)*100;
+          document.getElementById('progressFill').style.width=pct+'%';
+          document.getElementById('timeElapsed').textContent=formatTime(data.progress_ms/1000);
+          document.getElementById('timeDur').textContent=formatTime(data.item.duration_ms/1000);
+          if(!data.is_playing){playBtn.innerHTML='&#9654;'}else{playBtn.innerHTML='&#10074;&#10074;'}
+        }
+      }
+    }catch(e){}
+  },1000);
+}
+
+/* ── SLANG DB ── */
+const slangDb={
+  titi:{word:'Titi',literal:'Uncle/Aunt (formal Spanish)',meaning:'Puerto Rican slang for "auntie" — a close female family figure always in your business about your love life.',why:'Google Translate returns "Uncle." It misses the Puerto Rican colloquial usage, losing the familial intimacy and gossip culture the word carries.',region:'Puerto Rico — affectionate term for older female relatives, especially those who ask about your relationships.'},
+  pregunto:{word:'Me Preguntó',literal:'"Asked me"',meaning:'"My auntie\'s been asking about me" — she\'s asking about Bad Bunny\'s love life. Family gossip as a dinner table staple.',why:'Machine translation gives a flat "asked me" without the cultural weight — a titi asking about you means your love life is the topic of conversation.',region:'Common across Latin Caribbean where family involvement in your personal life is normal, not intrusive.'},
+  perreo:{word:'Perreo',literal:'"Dog-like" (dancing)',meaning:'A reggaeton dance style involving close, rhythmic body contact. Central to the culture, not derogatory.',why:'Translators skip it or say "grinding," stripping the cultural identity. Perreo is a specific dance form with its own history.',region:'Originated in Puerto Rico\'s underground reggaeton scene in the 1990s. Now global.'},
+  bellaquear:{word:'Bellaquear',literal:'"To be mischievous"',meaning:'To flirt aggressively, be boldly provocative in a romantic context. Carries confidence, not shame.',why:'No single English word captures it. "Naughty" is too mild. "Promiscuous" is too judgmental. The word is playful and empowering in reggaeton.',region:'Puerto Rican slang mainstreamed through reggaeton. Widely understood across Latin America.'},
+  ojitos:{word:'Ojitos Lindos',literal:'"Pretty little eyes"',meaning:'The -itos suffix adds deep affection and intimacy. Turns a compliment into something personal and vulnerable.',why:'Machine translation gives "pretty eyes" and drops the diminutive. The -itos is what makes it intimate instead of generic.',region:'Diminutives are fundamental to Spanish emotional expression. They convey warmth English can\'t replicate.'},
+  dakiti:{word:'Dakiti',literal:'(Place name)',meaning:'A beach in Fajardo, Puerto Rico. Represents escape — a secret paradise where two people can be alone.',why:'Translators treat it as nonsense. It\'s a real place that evokes Puerto Rican geography and the fantasy of tropical isolation.',region:'Fajardo, east coast of Puerto Rico. Relatively secluded — perfect metaphor for intimate escape.'}
+};
+
+/* ── TRACKS ── */
+const tracks=[
+  {title:'Titi Me Preguntó',artist:'Bad Bunny',album:'Un Verano Sin Ti',year:'2022',emoji:'🌴',dur:204,
+    lines:[
+      {t:0,o:'Titi me preguntó',e:'My auntie\'s been asking about me',s:['titi','pregunto']},
+      {t:8,o:'Si tengo muchas novias',e:'If I\'ve got a lot of girlfriends'},
+      {t:13,o:'Titi me preguntó',e:'My auntie asked me',s:['titi']},
+      {t:18,o:'Si tengo muchas babies',e:'If I\'ve got a lot of girls'},
+      {t:24,o:'Yo le dije que sí, que tengo muchas novias',e:'I told her yeah, I\'ve got plenty'},
+      {t:30,o:'Y que ninguna me bota porque a todas les gusto',e:'And none of them leave because they\'re all into me'},
+      {t:38,o:'Ella quiere perreo, yo le doy perreo',e:'She wants to dance close, so I give her that',s:['perreo']},
+      {t:44,o:'Hoy se bebe, hoy es viernes',e:'Today we drink, today is Friday'},
+      {t:50,o:'Verano sin ti, verano sin ti',e:'Summer without you, summer without you'},
+      {t:56,o:'Pero con to\' el mundo',e:'But with everyone else'},
+      {t:62,o:'Yo vivo mi vida tranquilo',e:'I\'m living my life in peace'},
+      {t:68,o:'No le hago daño a nadie',e:'I don\'t hurt anyone'},
+      {t:74,o:'Pero si me buscan, me encuentran',e:'But if they come looking, they\'ll find me'},
+      {t:82,o:'Siempre ready pa\' bellaquear',e:'Always ready to get bold',s:['bellaquear']},
+      {t:90,o:'Yo no soy un santo, nunca lo fui',e:'I\'m no saint, never was'},
+      {t:96,o:'Pero soy buena persona',e:'But I\'m a good person'},
+      {t:104,o:'Titi me preguntó',e:'My auntie asked me again',s:['titi']},
+      {t:112,o:'Y yo le dije: "Mira, titi..."',e:'And I said: "Look, auntie..."'},
+      {t:120,o:'Es un verano sin ti',e:'It\'s a summer without you'},
+      {t:130,o:'Pero yo estoy bien',e:'But I\'m doing fine'},
+      {t:140,o:'La vida sigue, el sol sale',e:'Life goes on, the sun rises'},
+      {t:150,o:'Y las olas siguen rompiendo',e:'And the waves keep breaking'},
+      {t:160,o:'Un verano más sin ti',e:'One more summer without you'},
+      {t:170,o:'Pero nunca un verano solo',e:'But never a summer alone'},
+      {t:180,o:'Titi me preguntó...',e:'My auntie asked me...',s:['titi']},
+      {t:192,o:'Y yo solo sonreí',e:'And I just smiled'},
+    ]},
+  {title:'Dakiti',artist:'Bad Bunny ft. Jhay Cortez',album:'El Último Tour Del Mundo',year:'2020',emoji:'🏝️',dur:198,
+    lines:[
+      {t:0,o:'Me gusta cómo mueve ese body',e:'I like the way she moves that body'},
+      {t:8,o:'Te quiero pa\' mi, vamo\' pa\' Dakiti',e:'I want you for myself, let\'s go to Dakiti',s:['dakiti']},
+      {t:16,o:'Que nadie se entere de lo nuestro',e:'Let nobody find out about us'},
+      {t:24,o:'Déjame meterme en tu vida',e:'Let me into your life'},
+      {t:32,o:'Que la noche está pa\' pasarla bien',e:'The night\'s for having a good time'},
+      {t:40,o:'Contigo es que yo quiero estar',e:'It\'s you I want to be with'},
+      {t:48,o:'Tú eres la que me tiene loco',e:'You\'re the one driving me crazy'},
+      {t:56,o:'Yo no sé lo que me hiciste',e:'I don\'t know what you did to me'},
+      {t:64,o:'Pero me tiene\' pensando en ti',e:'But you\'ve got me thinking of you'},
+      {t:72,o:'A toda hora, a todo momento',e:'Every hour, every moment'},
+      {t:80,o:'Vamo\' pa\' Dakiti',e:'Let\'s go to Dakiti',s:['dakiti']},
+      {t:88,o:'Donde nadie nos vea',e:'Where nobody can see us'},
+      {t:96,o:'Solo tú y yo en la playa',e:'Just you and me on the beach'},
+      {t:106,o:'Con la luna llena alumbrando',e:'With the full moon lighting us up'},
+      {t:116,o:'Baby, no te vayas todavía',e:'Baby, don\'t leave yet'},
+      {t:126,o:'Quédate un ratito más',e:'Stay a little while longer'},
+      {t:136,o:'Que la noche es joven',e:'The night is young'},
+      {t:148,o:'Vamo\' pa\' Dakiti',e:'Let\'s go to Dakiti',s:['dakiti']},
+      {t:160,o:'La arena, el mar, la brisa',e:'The sand, the sea, the breeze'},
+      {t:172,o:'Todo lo que necesito',e:'Everything I need'},
+      {t:184,o:'Dakiti...',e:'Dakiti...',s:['dakiti']},
+    ]},
+  {title:'Ojitos Lindos',artist:'Bad Bunny ft. Bomba Estéreo',album:'Un Verano Sin Ti',year:'2022',emoji:'👀',dur:228,
+    lines:[
+      {t:0,o:'Ojitos lindos, ay, ojitos lindos',e:'Pretty little eyes, oh, pretty little eyes',s:['ojitos']},
+      {t:10,o:'Tiene\' lo\' ojito\' lindo\'',e:'You\'ve got the prettiest little eyes',s:['ojitos']},
+      {t:18,o:'Yo soy tuyo, baby, no me olvide\'',e:'I\'m yours, baby, don\'t forget me'},
+      {t:26,o:'Si algún día me muero',e:'If I die someday'},
+      {t:34,o:'Quiero que sepas que fuiste lo que más quise',e:'I want you to know you were what I loved most'},
+      {t:44,o:'Y antes que se me olvide',e:'And before I forget'},
+      {t:52,o:'Quiero que sepas que el tiempo contigo fue lo mejor',e:'I want you to know that time with you was the best'},
+      {t:64,o:'Aunque después todo cambió',e:'Even though everything changed after'},
+      {t:74,o:'Yo te sigo queriendo igual',e:'I still love you the same'},
+      {t:84,o:'Con esos ojitos lindos',e:'With those pretty little eyes',s:['ojitos']},
+      {t:94,o:'Me miraste y me perdió',e:'You looked at me and I was lost'},
+      {t:104,o:'Como la luna en el mar',e:'Like the moon on the sea'},
+      {t:114,o:'Brillábamo\' los dos',e:'We both were shining'},
+      {t:124,o:'Pero las luces se apagaron',e:'But the lights went out'},
+      {t:134,o:'Solo tus ojitos lindos',e:'Only your pretty little eyes',s:['ojitos']},
+      {t:144,o:'Me alumbraban en la soledad',e:'Lit me up in the loneliness'},
+      {t:156,o:'Veo esos ojitos lindos',e:'I see those pretty little eyes',s:['ojitos']},
+      {t:168,o:'Y sonrío en la oscuridad',e:'And I smile in the darkness'},
+      {t:180,o:'Ojitos lindos...',e:'Pretty little eyes...',s:['ojitos']},
+      {t:194,o:'Siempre van a ser mi luz',e:'They\'ll always be my light'},
+      {t:210,o:'En cualquier lugar',e:'Anywhere'},
+    ]},
+];
+
+/* ── STATE ── */
+let cur=0,playing=false,curTime=0,aFrame=null,lastTs=null,synced=0;
+const playBtn=document.getElementById('playBtn'),elapsed=document.getElementById('timeElapsed'),durLabel=document.getElementById('timeDur');
+const fill=document.getElementById('progressFill'),bar=document.getElementById('progressBar');
+const pTitle=document.getElementById('playerTitle'),pArtist=document.getElementById('playerArtist');
+const origCol=document.getElementById('lyricsOrig'),transCol=document.getElementById('lyricsTrans');
+const slangDrawer=document.getElementById('slangDrawer'),slangBackdrop=document.getElementById('slangBackdrop');
+
+function formatTime(s){const m=Math.floor(s/60);return m+':'+(Math.floor(s%60)+'').padStart(2,'0')}
+
+function loadTrack(idx){
+  cur=idx;playing=false;curTime=0;lastTs=null;if(aFrame)cancelAnimationFrame(aFrame);
+  const t=tracks[idx];pTitle.textContent=t.title;pArtist.textContent=t.artist;
+  durLabel.textContent=formatTime(t.dur);elapsed.textContent='0:00';fill.style.width='0%';
+  playBtn.innerHTML='&#9654;';
+  document.querySelectorAll('.track-card').forEach((c,i)=>c.classList.toggle('active',i===idx));
+  document.getElementById('playerArt').textContent=t.emoji;
+  renderLyrics();updateActive();
+}
+
+function renderLyrics(){
+  const t=tracks[cur];
+  let oHTML='<div class="col-header">Original (Spanish)</div>';
+  let tHTML='<div class="col-header">Translation (English)</div>';
+  t.lines.forEach((l,i)=>{
+    let orig=l.o;
+    if(l.s){l.s.forEach(k=>{const s=slangDb[k];if(s){const rx=new RegExp('('+s.word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','i');orig=orig.replace(rx,'<span class="slang-pill" data-slang="'+k+'">$1</span>')}});}
+    oHTML+='<div class="lyric-line" data-line="'+i+'">'+orig+'</div>';
+    tHTML+='<div class="lyric-line" data-line="'+i+'">'+l.e+'</div>';
+  });
+  origCol.innerHTML=oHTML;transCol.innerHTML=tHTML;
+  document.querySelectorAll('.slang-pill').forEach(p=>{p.addEventListener('click',e=>{e.stopPropagation();const k=p.dataset.slang;if(slangDb[k])openSlang(slangDb[k])})});
+}
+
+function openSlang(d){
+  document.getElementById('slangWord').textContent=d.word;
+  document.getElementById('slangLiteral').textContent=d.literal;
+  document.getElementById('slangMeaning').textContent=d.meaning;
+  document.getElementById('slangWhy').textContent=d.why;
+  document.getElementById('slangRegion').textContent=d.region;
+  slangDrawer.classList.add('open');slangBackdrop.classList.add('open');
+}
+document.getElementById('slangClose').addEventListener('click',()=>{slangDrawer.classList.remove('open');slangBackdrop.classList.remove('open')});
+slangBackdrop.addEventListener('click',()=>{slangDrawer.classList.remove('open');slangBackdrop.classList.remove('open')});
+
+function updateActive(){
+  const t=tracks[cur];let ai=-1;
+  for(let i=t.lines.length-1;i>=0;i--){if(curTime>=t.lines[i].t){ai=i;break}}
+  origCol.querySelectorAll('.lyric-line').forEach((el,i)=>{el.classList.toggle('active',i===ai);el.classList.toggle('past',i<ai)});
+  transCol.querySelectorAll('.lyric-line').forEach((el,i)=>{el.classList.toggle('active',i===ai);el.classList.toggle('past',i<ai)});
+  if(ai>=0){
+    const ae=origCol.querySelectorAll('.lyric-line')[ai];if(ae)ae.scrollIntoView({behavior:'smooth',block:'center'});
+    const te=transCol.querySelectorAll('.lyric-line')[ai];if(te)te.scrollIntoView({behavior:'smooth',block:'center'});
+    if(ai+1>synced){synced=ai+1}
+  }
+}
+
+function tick(ts){
+  if(!playing)return;
+  if(lastTs===null)lastTs=ts;
+  curTime+=(ts-lastTs)/1000;lastTs=ts;
+  const dur=tracks[cur].dur;
+  if(curTime>=dur){curTime=0;playing=false;playBtn.innerHTML='&#9654;';lastTs=null}
+  elapsed.textContent=formatTime(curTime);fill.style.width=(curTime/dur*100)+'%';
+  updateActive();if(playing)aFrame=requestAnimationFrame(tick);
+}
+
+playBtn.addEventListener('click',()=>{playing=!playing;playBtn.innerHTML=playing?'&#10074;&#10074;':'&#9654;';if(playing){lastTs=null;aFrame=requestAnimationFrame(tick)}});
+bar.addEventListener('click',e=>{const r=bar.getBoundingClientRect();curTime=(e.clientX-r.left)/r.width*tracks[cur].dur;elapsed.textContent=formatTime(curTime);fill.style.width=((e.clientX-r.left)/r.width*100)+'%';updateActive()});
+document.getElementById('prevBtn').addEventListener('click',()=>loadTrack((cur-1+tracks.length)%tracks.length));
+document.getElementById('nextBtn').addEventListener('click',()=>loadTrack((cur+1)%tracks.length));
+
+/* ── BUILD TRACK SHELF ── */
+const shelf=document.getElementById('trackShelf');
+tracks.forEach((t,i)=>{
+  const card=document.createElement('div');card.className='track-card'+(i===0?' active':'');
+  card.innerHTML=`<div class="track-art">${t.emoji}</div><div class="track-card-body"><div class="track-card-title">${t.title}</div><div class="track-card-artist">${t.artist} · ${t.year}</div></div>`;
+  card.addEventListener('click',()=>loadTrack(i));
+  shelf.appendChild(card);
+});
+
+loadTrack(0);
+})();
+</script>
+</body>
+</html>

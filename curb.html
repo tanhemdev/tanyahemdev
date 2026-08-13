@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curb // Campus Move-Out Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F5F5F0;--surface:#FFFFFF;--surface-2:#F0EFEA;
+  --text:#111111;--text-2:#5F5F5F;--text-3:#999;
+  --red:#E60023;--red-hover:#AD081B;--green:#00A551;
+  --border:#E0DED8;--border-2:#D5D3CC;
+  --heading:'Poppins',sans-serif;--body:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:16px;--radius-sm:12px;
+  --shadow:0 1px 4px rgba(0,0,0,.08);--shadow-lg:0 8px 24px rgba(0,0,0,.1)
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV (Pinterest style) ── */
+.topbar{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.topbar-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.topbar-logo{width:32px;height:32px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--heading);font-size:.85rem;font-weight:700}
+.topbar-title{font-family:var(--heading);font-size:1.1rem;font-weight:700;color:var(--red);letter-spacing:-.02em}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-pill{font-family:var(--heading);font-size:.85rem;font-weight:600;padding:8px 16px;border-radius:24px;transition:all .2s;border:none;background:none;cursor:pointer;color:var(--text)}
+.nav-pill:hover{background:var(--surface-2)}
+.nav-pill.active{background:var(--text);color:#fff}
+.nav-pill.red{background:var(--red);color:#fff;font-weight:600}
+.nav-pill.red:hover{background:var(--red-hover)}
+.search-bar{flex:1;max-width:500px;position:relative}
+.search-bar input{width:100%;padding:12px 16px 12px 40px;background:var(--surface-2);border:none;border-radius:24px;font-family:var(--body);font-size:.9rem;color:var(--text);outline:none;transition:background .2s}
+.search-bar input:focus{background:#E8E7E2;box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+.search-bar input::placeholder{color:var(--text-3)}
+.search-bar::before{content:'🔍';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.85rem}
+@media(max-width:800px){.search-bar{max-width:none;order:3;flex-basis:100%}.nav-links{display:none}}
+
+/* ── PROBLEM BANNER ── */
+.problem-banner{background:var(--text);color:#fff;padding:56px 0;position:relative}
+.problem-inner{max-width:1200px;margin:0 auto;padding:0 24px}
+.problem-label{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:14px}
+.problem-h{font-family:var(--heading);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:16px;letter-spacing:-.03em;max-width:680px}
+.problem-sub{font-size:.95rem;color:rgba(255,255,255,.55);max-width:600px;line-height:1.7;margin-bottom:32px}
+.problem-stats{display:flex;gap:24px;flex-wrap:wrap}
+.pstat{text-align:center}
+.pstat-val{font-family:var(--heading);font-size:1.8rem;font-weight:800;color:#fff}
+.pstat-val .unit{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.5)}
+.pstat-label{font-family:var(--mono);font-size:.55rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:2px}
+
+/* ── COUNTDOWN ── */
+.countdown-strip{background:var(--red);color:#fff;padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:16px;font-family:var(--heading);font-size:.88rem;font-weight:600}
+.cd-timer{font-family:var(--mono);font-size:1.1rem;font-weight:700;letter-spacing:.04em}
+
+/* ── FILTERS (Pinterest pill bar) ── */
+.filter-section{max-width:1400px;margin:0 auto;padding:20px 20px 0}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cat-pill{font-family:var(--heading);font-size:.85rem;font-weight:600;padding:10px 20px;border-radius:24px;border:none;cursor:pointer;transition:all .2s}
+.cat-pill{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.cat-pill:hover{background:var(--surface-2)}
+.cat-pill.active{background:var(--text);color:#fff;border-color:var(--text)}
+
+/* ── MASONRY GRID (Pinterest waterfall) ── */
+.masonry-wrap{max-width:1400px;margin:0 auto;padding:16px 12px}
+.masonry{column-count:4;column-gap:12px}
+@media(max-width:1100px){.masonry{column-count:3}}
+@media(max-width:700px){.masonry{column-count:2}}
+@media(max-width:450px){.masonry{column-count:1}}
+.pin{break-inside:avoid;margin-bottom:12px;border-radius:var(--radius);overflow:hidden;background:var(--surface);cursor:pointer;transition:transform .2s;position:relative}
+.pin:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.pin-img{width:100%;display:block;background-size:cover;background-position:center;position:relative}
+.pin-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);opacity:0;transition:opacity .25s;display:flex;align-items:flex-end;justify-content:space-between;padding:12px}
+.pin:hover .pin-overlay{opacity:1}
+.pin-save{background:var(--red);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-family:var(--heading);font-size:.82rem;font-weight:700;cursor:pointer;transition:background .2s}
+.pin-save:hover{background:var(--red-hover)}
+.pin-claim{background:rgba(255,255,255,.85);color:var(--text);border:none;padding:8px 16px;border-radius:20px;font-family:var(--heading);font-size:.78rem;font-weight:600;cursor:pointer;backdrop-filter:blur(4px)}
+.pin-body{padding:12px 14px 14px}
+.pin-title{font-family:var(--heading);font-weight:600;font-size:.9rem;margin-bottom:2px;line-height:1.3}
+.pin-meta{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-2)}
+.pin-price{font-family:var(--heading);font-weight:700;color:var(--red)}
+.pin-loc{font-size:.75rem;color:var(--text-3);margin-top:4px}
+.pin-status{font-family:var(--mono);font-size:.55rem;padding:3px 8px;border-radius:6px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:6px;display:inline-block}
+.pin-status.available{background:#E6F9EC;color:var(--green)}
+.pin-status.claimed{background:#FFF3CD;color:#856404}
+
+/* ── MODALS ── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border-radius:20px;padding:32px;max-width:480px;width:92vw;position:relative;box-shadow:var(--shadow-lg)}
+.modal-close{position:absolute;top:14px;right:14px;background:var(--surface-2);border:none;color:var(--text-2);width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.modal-close:hover{background:var(--border)}
+.modal h3{font-family:var(--heading);font-size:1.2rem;font-weight:700;margin-bottom:16px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-family:var(--heading);font-size:.82rem;font-weight:600;margin-bottom:5px;color:var(--text-2)}
+.form-group input,.form-group select{width:100%;padding:12px 16px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;font-family:var(--body);font-size:.88rem;color:var(--text);outline:none}
+.form-group input:focus,.form-group select:focus{border-color:var(--red)}
+.form-actions{display:flex;gap:10px;margin-top:20px}
+.btn-red{flex:1;padding:14px;border-radius:24px;border:none;background:var(--red);color:#fff;font-family:var(--heading);font-size:.88rem;cursor:pointer;font-weight:700}
+.btn-red:hover{background:var(--red-hover)}
+.btn-outline{padding:14px 20px;border-radius:24px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:var(--heading);font-size:.88rem;cursor:pointer;font-weight:600}
+.pickup-opts{display:flex;flex-direction:column;gap:8px;margin:16px 0}
+.pickup-opt{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--surface-2);border-radius:12px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
+.pickup-opt.selected{border-color:var(--red);background:#FFF5F5}
+.pickup-opt input{accent-color:var(--red)}
+
+/* ── LIST ITEM BUTTON ── */
+.list-float{position:fixed;bottom:24px;right:24px;z-index:50;background:var(--red);color:#fff;border:none;padding:16px 28px;border-radius:32px;font-family:var(--heading);font-size:.92rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(230,0,35,.3);transition:all .25s;display:flex;align-items:center;gap:8px}
+.list-float:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(230,0,35,.35)}
+
+/* ── GH MODAL ── */
+.tech-tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.tech-tag{font-family:var(--mono);font-size:.62rem;padding:4px 10px;border-radius:8px;background:var(--surface-2);color:var(--text-2)}
+.modal-link{font-family:var(--mono);font-size:.78rem;color:var(--red);font-weight:500}
+
+/* ── IMPACT ── */
+.impact-section{background:var(--surface);border-top:1px solid var(--border);padding:56px 0}
+.impact-inner{max-width:1200px;margin:0 auto;padding:0 24px}
+.impact-label{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-3);margin-bottom:14px}
+.impact-h{font-family:var(--heading);font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.impact-sub{font-size:.92rem;color:var(--text-2);max-width:560px;line-height:1.7;margin-bottom:28px}
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:28px}
+.impact-card{background:var(--surface-2);border-radius:var(--radius-sm);padding:24px;text-align:center}
+.impact-val{font-family:var(--heading);font-size:2rem;font-weight:800;color:var(--red)}
+.impact-desc{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-top:4px}
+.next-box{background:var(--surface-2);border-radius:var(--radius);padding:28px}
+.next-box h4{font-family:var(--heading);font-weight:700;margin-bottom:14px}
+.next-list{display:flex;flex-direction:column;gap:10px}
+.next-item{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--text-2);line-height:1.5}
+.next-num{font-family:var(--mono);font-size:.65rem;font-weight:700;color:var(--red);background:#FFF0F0;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.footer{text-align:center;padding:28px;font-family:var(--mono);font-size:.62rem;color:var(--text-3)}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <div class="topbar-logo">C</div>
+      <div class="topbar-title">curb</div>
+    </div>
+    <div class="search-bar"><input type="text" id="searchInput" placeholder="Search for desks, lamps, mini fridges..."></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-pill">&larr; Portfolio</a>
+      <button class="nav-pill" id="ghBtn">GitHub</button>
+    </div>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown-strip">
+  <span>UC Berkeley Move-Out Window closes in</span>
+  <span class="cd-timer" id="cdTimer">47:58:12</span>
+</div>
+
+<!-- PROBLEM -->
+<div class="problem-banner">
+  <div class="problem-inner">
+    <div class="problem-label">The Problem</div>
+    <h2 class="problem-h">Every May, perfectly good furniture goes to the landfill. Every August, freshmen buy it brand new.</h2>
+    <p class="problem-sub">US colleges generate massive move-out waste because there's no easy way to hand stuff off when everyone's moving at the same time. It's not a lack of caring — it's a logistics problem.</p>
+    <div class="problem-stats">
+      <div class="pstat"><div class="pstat-val">12.1<span class="unit">M</span></div><div class="pstat-label">tons furniture waste/yr</div></div>
+      <div class="pstat"><div class="pstat-val">0.3<span class="unit">%</span></div><div class="pstat-label">furniture recycled</div></div>
+      <div class="pstat"><div class="pstat-val">$12.2<span class="unit">B</span></div><div class="pstat-label">dorm furnishing spend/yr</div></div>
+      <div class="pstat"><div class="pstat-val">4,000<span class="unit">+</span></div><div class="pstat-label">US colleges affected</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-section">
+  <div class="filter-row" id="filterRow">
+    <button class="cat-pill active" data-cat="All">All</button>
+    <button class="cat-pill" data-cat="Furniture">🪑 Furniture</button>
+    <button class="cat-pill" data-cat="Electronics">💻 Electronics</button>
+    <button class="cat-pill" data-cat="Kitchen">🍳 Kitchen</button>
+    <button class="cat-pill" data-cat="Books">📚 Books</button>
+    <button class="cat-pill" data-cat="Free">🆓 Free Only</button>
+  </div>
+</div>
+
+<!-- MASONRY GRID -->
+<div class="masonry-wrap"><div class="masonry" id="masonry"></div></div>
+
+<!-- LIST FLOAT -->
+<button class="list-float" id="listFloatBtn">+ List an Item</button>
+
+<!-- GH MODAL -->
+<div class="modal-overlay" id="ghModal">
+  <div class="modal">
+    <button class="modal-close" id="ghClose">&times;</button>
+    <h3>Technical Architecture</h3>
+    <p style="font-size:.88rem;color:var(--text-2);margin-bottom:12px;line-height:1.65">Curb is a mobile-first PWA geo-fenced to a 2-mile campus radius. Listings auto-expire in 72 hours. Real-time sync via Cloud Firestore, .edu email validation, and automatic image compression on upload.</p>
+    <div class="tech-tags">
+      <span class="tech-tag">React</span><span class="tech-tag">Tailwind CSS</span><span class="tech-tag">Node.js</span>
+      <span class="tech-tag">Cloud Firestore</span><span class="tech-tag">Firebase Auth (.edu)</span><span class="tech-tag">Google Maps API</span><span class="tech-tag">PWA</span>
+    </div>
+    <a href="https://github.com/tanhemdev/curb" target="_blank" rel="noopener" class="modal-link">View source on GitHub &nearr;</a>
+  </div>
+</div>
+
+<!-- CLAIM MODAL -->
+<div class="modal-overlay" id="claimModal">
+  <div class="modal">
+    <button class="modal-close" id="claimClose">&times;</button>
+    <h3 id="claimTitle">Schedule Pickup</h3>
+    <p id="claimItemName" style="font-weight:600;margin-bottom:4px"></p>
+    <div class="pickup-opts" id="pickupOpts">
+      <label class="pickup-opt selected"><input type="radio" name="pickup" value="0" checked><span>Today, 2:00 PM – 4:00 PM</span></label>
+      <label class="pickup-opt"><input type="radio" name="pickup" value="1"><span>Today, 5:00 PM – 7:00 PM</span></label>
+      <label class="pickup-opt"><input type="radio" name="pickup" value="2"><span>Tomorrow, 10:00 AM – 12:00 PM</span></label>
+    </div>
+    <div class="form-actions"><button class="btn-outline" id="claimCancel">Cancel</button><button class="btn-red" id="claimConfirm">Confirm Pickup</button></div>
+  </div>
+</div>
+
+<!-- LIST MODAL -->
+<div class="modal-overlay" id="listModal">
+  <div class="modal">
+    <button class="modal-close" id="listClose">&times;</button>
+    <h3>List an Item</h3>
+    <form id="listForm">
+      <div class="form-group"><label>What are you listing?</label><input type="text" id="listTitle" placeholder="e.g. IKEA KALLAX shelf — great condition" required></div>
+      <div class="form-group"><label>Category</label><select id="listCat"><option value="Furniture">Furniture</option><option value="Electronics">Electronics</option><option value="Kitchen">Kitchen</option><option value="Books">Books</option></select></div>
+      <div class="form-group"><label>Price ($0 for free)</label><input type="number" id="listPrice" min="0" max="500" value="0" required></div>
+      <div class="form-group"><label>Pickup spot</label><input type="text" id="listLoc" placeholder="e.g. Unit 2 front steps" required></div>
+      <div class="form-actions"><button type="button" class="btn-outline" id="listCancel">Cancel</button><button type="submit" class="btn-red">List Item</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- IMPACT -->
+<div class="impact-section">
+  <div class="impact-inner">
+    <div class="impact-label">Pilot Impact — UC Berkeley, May 2025</div>
+    <h3 class="impact-h">First pilot. One campus. One move-out week.</h3>
+    <p class="impact-sub">We ran a 72-hour pilot during Berkeley's May move-out window. No marketing budget — just flyers in dorms and a GroupMe blast. Here's what happened.</p>
+    <div class="impact-grid">
+      <div class="impact-card"><div class="impact-val">127</div><div class="impact-desc">Items Listed</div></div>
+      <div class="impact-card"><div class="impact-val">84</div><div class="impact-desc">Items Handed Off</div></div>
+      <div class="impact-card"><div class="impact-val">~1,200 lbs</div><div class="impact-desc">Waste Diverted</div></div>
+      <div class="impact-card"><div class="impact-val">8.4 min</div><div class="impact-desc">Avg Time-to-Match</div></div>
+      <div class="impact-card"><div class="impact-val">66%</div><div class="impact-desc">Listing Conversion</div></div>
+    </div>
+    <div class="next-box">
+      <h4>What's Next</h4>
+      <div class="next-list">
+        <div class="next-item"><span class="next-num">1</span>Expand to 5 Bay Area campuses for Fall 2026 move-in window (Stanford, SJSU, USF, SCU, Cal)</div>
+        <div class="next-item"><span class="next-num">2</span>Image-based auto-categorization using a fine-tuned ResNet model to reduce listing friction</div>
+        <div class="next-item"><span class="next-num">3</span>Partnership with UC Berkeley Office of Sustainability for official university endorsement</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Built by Tanya Hemdev &middot; UC Berkeley '26 &middot; Cognitive Science + Data Science</div>
+
+<script>
+(function(){
+
+/* ── MODALS ── */
+function setupModal(btnId,ovId,clId){const b=document.getElementById(btnId),o=document.getElementById(ovId),c=document.getElementById(clId);if(b)b.addEventListener('click',()=>o.classList.add('open'));c.addEventListener('click',()=>o.classList.remove('open'));o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')})}
+setupModal('ghBtn','ghModal','ghClose');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'))});
+
+/* ── COUNTDOWN ── */
+let totalSec=47*3600+58*60+12;
+const cdTimer=document.getElementById('cdTimer');
+setInterval(()=>{if(totalSec<=0)return;totalSec--;const h=Math.floor(totalSec/3600),m=Math.floor((totalSec%3600)/60),s=totalSec%60;cdTimer.textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')},1000);
+
+/* ── ITEM DATA with real unsplash photos ── */
+const photos={
+  Furniture:[
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=500&fit=crop',// couch
+    'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=400&h=600&fit=crop',// desk
+    'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=350&fit=crop',// chair
+    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=450&fit=crop',// shelf
+    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=380&fit=crop',// lamp+desk
+    'https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=400&h=500&fit=crop',// bed
+  ],
+  Electronics:[
+    'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=350&fit=crop',// monitor
+    'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop',// desk setup
+    'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=450&fit=crop',// fan
+  ],
+  Kitchen:[
+    'https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=400&h=380&fit=crop',// coffee maker
+    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=500&fit=crop',// kitchen stuff
+  ],
+  Books:[
+    'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=350&fit=crop',// books
+  ]
+};
+
+let items=[
+  {id:1,title:'IKEA MALM Desk — barely used',cat:'Furniture',price:25,loc:'Unit 2, Channing Way',status:'available',img:photos.Furniture[1]},
+  {id:2,title:'Floor Lamp (works perfectly)',cat:'Furniture',price:0,loc:'Clark Kerr entrance',status:'available',img:photos.Furniture[4]},
+  {id:3,title:'Samsung 24" Monitor',cat:'Electronics',price:45,loc:'Foothill Res Hall',status:'available',img:photos.Electronics[0]},
+  {id:4,title:'Mini Fridge — Galanz 3.3 cu ft',cat:'Electronics',price:30,loc:'Unit 1 lobby',status:'available',img:photos.Electronics[1]},
+  {id:5,title:'Keurig Coffee Maker',cat:'Kitchen',price:0,loc:'Unit 3, Priestley',status:'available',img:photos.Kitchen[0]},
+  {id:6,title:'Full Bedding Set (queen)',cat:'Furniture',price:0,loc:'Clark Kerr patio',status:'available',img:photos.Furniture[5]},
+  {id:7,title:'Ergonomic Desk Chair',cat:'Furniture',price:35,loc:'Stern Hall front',status:'available',img:photos.Furniture[2]},
+  {id:8,title:'CS 61A/61B/70 Textbooks',cat:'Books',price:15,loc:'Moffitt steps',status:'available',img:photos.Books[0]},
+  {id:9,title:'Standing Fan (quiet)',cat:'Electronics',price:0,loc:'Bowles Hall',status:'available',img:photos.Electronics[2]},
+  {id:10,title:'3-Tier Bookshelf',cat:'Furniture',price:10,loc:'Durant Ave curb',status:'available',img:photos.Furniture[3]},
+  {id:11,title:'Kitchen Set — pots, pans, utensils',cat:'Kitchen',price:0,loc:'I-House',status:'available',img:photos.Kitchen[1]},
+  {id:12,title:'Cozy Reading Couch',cat:'Furniture',price:20,loc:'Bowles Hall',status:'available',img:photos.Furniture[0]},
+];
+let nextId=13;
+
+/* ── RENDER MASONRY ── */
+const masonry=document.getElementById('masonry');
+let activeFilter='All',searchQuery='';
+
+function matchItem(item){
+  if(activeFilter==='Free')return item.price===0;
+  if(activeFilter!=='All')return item.cat===activeFilter;
+  return true;
+}
+function matchSearch(item){
+  if(!searchQuery)return true;
+  return (item.title+' '+item.cat+' '+item.loc).toLowerCase().includes(searchQuery);
+}
+
+function render(){
+  const filtered=items.filter(i=>matchItem(i)&&matchSearch(i));
+  masonry.innerHTML='';
+  if(!filtered.length){masonry.innerHTML='<div style="padding:60px;text-align:center;color:var(--text-3);font-family:var(--heading);column-span:all">No items match. Try a different filter.</div>';return}
+  filtered.forEach(item=>{
+    const pin=document.createElement('div');
+    pin.className='pin';pin.dataset.id=item.id;
+    const isClaimed=item.status==='claimed';
+    pin.innerHTML=`
+      <div style="position:relative">
+        <img class="pin-img" src="${item.img}" alt="${item.title}" loading="lazy" style="width:100%;display:block">
+        <div class="pin-overlay">
+          <button class="pin-save">${isClaimed?'Claimed':'Save'}</button>
+          ${!isClaimed?'<button class="pin-claim" data-id="'+item.id+'">Claim</button>':''}
+        </div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-title">${item.title}</div>
+        <div class="pin-meta"><span class="pin-price">${item.price===0?'FREE':'$'+item.price}</span><span>&middot;</span><span>${item.cat}</span></div>
+        <div class="pin-loc">📍 ${item.loc}</div>
+        <span class="pin-status ${isClaimed?'claimed':'available'}">${isClaimed?'CLAIMED':'AVAILABLE'}</span>
+      </div>`;
+    masonry.appendChild(pin);
+  });
+  masonry.querySelectorAll('.pin-claim').forEach(btn=>{btn.addEventListener('click',e=>{e.stopPropagation();openClaim(+btn.dataset.id)})});
+}
+
+/* ── FILTERS ── */
+document.getElementById('filterRow').addEventListener('click',e=>{
+  const btn=e.target.closest('.cat-pill');if(!btn)return;
+  document.querySelectorAll('.cat-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');activeFilter=btn.dataset.cat;render();
+});
+document.getElementById('searchInput').addEventListener('input',e=>{searchQuery=e.target.value.toLowerCase().trim();render()});
+
+/* ── CLAIM ── */
+const claimModal=document.getElementById('claimModal'),claimName=document.getElementById('claimItemName');
+let claimingId=null;
+function openClaim(id){
+  const item=items.find(i=>i.id===id);if(!item||item.status==='claimed')return;
+  claimingId=id;claimName.textContent=item.title+' — '+(item.price===0?'FREE':'$'+item.price);
+  claimModal.classList.add('open');
+  document.querySelectorAll('.pickup-opt').forEach((o,i)=>{o.classList.toggle('selected',i===0);o.querySelector('input').addEventListener('change',()=>{document.querySelectorAll('.pickup-opt').forEach(x=>x.classList.remove('selected'));o.classList.add('selected')})});
+}
+document.getElementById('claimClose').addEventListener('click',()=>claimModal.classList.remove('open'));
+document.getElementById('claimCancel').addEventListener('click',()=>claimModal.classList.remove('open'));
+claimModal.addEventListener('click',e=>{if(e.target===claimModal)claimModal.classList.remove('open')});
+document.getElementById('claimConfirm').addEventListener('click',()=>{
+  if(claimingId===null)return;
+  const item=items.find(i=>i.id===claimingId);if(item)item.status='claimed';
+  claimModal.classList.remove('open');claimingId=null;render();
+});
+
+/* ── LIST ── */
+const listModal=document.getElementById('listModal');
+document.getElementById('listFloatBtn').addEventListener('click',()=>listModal.classList.add('open'));
+document.getElementById('listClose').addEventListener('click',()=>listModal.classList.remove('open'));
+document.getElementById('listCancel').addEventListener('click',()=>listModal.classList.remove('open'));
+listModal.addEventListener('click',e=>{if(e.target===listModal)listModal.classList.remove('open')});
+document.getElementById('listForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const title=document.getElementById('listTitle').value.trim();
+  const cat=document.getElementById('listCat').value;
+  const price=+document.getElementById('listPrice').value;
+  const loc=document.getElementById('listLoc').value.trim();
+  if(!title||!loc)return;
+  const catPhotos=photos[cat]||photos.Furniture;
+  items.unshift({id:nextId++,title,cat,price,loc,status:'available',img:catPhotos[Math.floor(Math.random()*catPhotos.length)]});
+  listModal.classList.remove('open');document.getElementById('listForm').reset();document.getElementById('listPrice').value='0';render();
+});
+
+render();
+})();
+</script>
+</body>
+</html>
